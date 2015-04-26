@@ -70,4 +70,5 @@ class Life {
     func lifeLeftInSeconds() -> Int {
         return self.lifeSpanInSeconds() - self.lifeLivedInSeconds()
     }
+
 }
