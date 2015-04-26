@@ -12,6 +12,7 @@
 		C147CE501AEACC4F00B5F8AE /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = C147CE4E1AEACC4F00B5F8AE /* MainMenu.xib */; };
 		C147CE5C1AEACC4F00B5F8AE /* MortalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C147CE5B1AEACC4F00B5F8AE /* MortalTests.swift */; };
 		C147CE661AEB5B4200B5F8AE /* Life.swift in Sources */ = {isa = PBXBuildFile; fileRef = C147CE651AEB5B4200B5F8AE /* Life.swift */; };
+		C183F0031AED6E6B004B1B00 /* StatusMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C183F0021AED6E6B004B1B00 /* StatusMenuController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,6 +35,7 @@
 		C147CE5A1AEACC4F00B5F8AE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C147CE5B1AEACC4F00B5F8AE /* MortalTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MortalTests.swift; sourceTree = "<group>"; };
 		C147CE651AEB5B4200B5F8AE /* Life.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Life.swift; sourceTree = "<group>"; };
+		C183F0021AED6E6B004B1B00 /* StatusMenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusMenuController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,11 +77,12 @@
 		C147CE471AEACC4F00B5F8AE /* Mortal */ = {
 			isa = PBXGroup;
 			children = (
-				C147CE4A1AEACC4F00B5F8AE /* AppDelegate.swift */,
-				C147CE4C1AEACC4F00B5F8AE /* Images.xcassets */,
 				C147CE4E1AEACC4F00B5F8AE /* MainMenu.xib */,
-				C147CE481AEACC4F00B5F8AE /* Supporting Files */,
+				C147CE4A1AEACC4F00B5F8AE /* AppDelegate.swift */,
+				C183F0021AED6E6B004B1B00 /* StatusMenuController.swift */,
 				C147CE651AEB5B4200B5F8AE /* Life.swift */,
+				C147CE4C1AEACC4F00B5F8AE /* Images.xcassets */,
+				C147CE481AEACC4F00B5F8AE /* Supporting Files */,
 			);
 			path = Mortal;
 			sourceTree = "<group>";
@@ -208,6 +211,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C183F0031AED6E6B004B1B00 /* StatusMenuController.swift in Sources */,
 				C147CE4B1AEACC4F00B5F8AE /* AppDelegate.swift in Sources */,
 				C147CE661AEB5B4200B5F8AE /* Life.swift in Sources */,
 			);
