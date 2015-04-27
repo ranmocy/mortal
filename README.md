@@ -4,5 +4,7 @@
 
 Display your mortal status in your OSX status bar.
 
-Prototyped from [forresty/mortal](https://github.com/forresty/mortal)
+Prototyped from [forresty/mortal](https://github.com/forresty/mortal).
 Rewrote in Swift with OSX 10.10.
+
+You can setup your birthday in the preferences panel.
