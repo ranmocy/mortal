@@ -20,10 +20,13 @@
         </customObject>
         <menu id="Mh9-ht-VlD">
             <items>
-                <menuItem title="Item 1" id="qNB-Ja-77w">
+                <menuItem title="Preferences" keyEquivalent="p" id="qNB-Ja-77w">
                     <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="openPrefs:" target="5Ww-vL-fu9" id="dam-57-Tdy"/>
+                    </connections>
                 </menuItem>
-                <menuItem title="Quit" id="7qf-dL-nSi">
+                <menuItem title="Quit" keyEquivalent="q" id="7qf-dL-nSi">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
                         <action selector="quit:" target="5Ww-vL-fu9" id="f1M-Z4-Ejo"/>

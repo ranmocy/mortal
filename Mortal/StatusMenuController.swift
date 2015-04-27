@@ -9,9 +9,17 @@
 import Foundation
 import Cocoa
 
-class StatusMenuController: NSObject {
+class StatusMenuController: NSObject, PreferencesDelegate {
 
     @IBOutlet weak var menu: NSMenu!
+
+    @IBAction func openPrefs(sender: NSMenuItem) {
+        preferencesController.showWindow(nil)
+    }
+
+    @IBAction func quit(sender: NSMenuItem) {
+        NSApplication.sharedApplication().terminate(self)
+    }
 
     lazy var statusItem : NSStatusItem = {
         return NSStatusBar.systemStatusBar().statusItemWithLength(-1)
@@ -28,8 +36,7 @@ class StatusMenuController: NSObject {
         }()
 
     lazy var life : Life = {
-        let date: NSDate = self.formatter.dateFromString("1991-05-11")!
-        return Life(birthDate: date)
+        return Life(birthDate: NSDate())
         }()
 
 
@@ -37,7 +44,9 @@ class StatusMenuController: NSObject {
         statusItem.highlightMode = true
         statusItem.menu = menu
 
-        updateProgress()
+        preferencesController.delegate = self
+
+        loadPreferences()
         if (!timer.valid) {
             timer.fire()
         }
@@ -54,8 +63,19 @@ class StatusMenuController: NSObject {
         statusItem.attributedTitle = title
     }
 
-    @IBAction func quit(sender: NSMenuItem) {
-        NSApplication.sharedApplication().terminate(self)
+    // Preferences
+    lazy var preferencesController: PreferencesController = {
+        return PreferencesController()
+        }()
+
+    func loadPreferences() {
+        let date = NSUserDefaults.standardUserDefaults().valueForKey("birthday") as? NSDate ?? NSDate()
+        life = Life(birthDate: date)
+        updateProgress()
+    }
+
+    func preferencesDidUpdate() {
+        loadPreferences()
     }
 
 }
