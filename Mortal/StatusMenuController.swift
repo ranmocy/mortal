@@ -21,29 +21,12 @@ class StatusMenuController: NSObject, PreferencesDelegate {
         NSApplication.sharedApplication().terminate(self)
     }
 
-    lazy var statusItem : NSStatusItem = {
-        return NSStatusBar.systemStatusBar().statusItemWithLength(-1)
-        }()
-
-    lazy var timer : NSTimer = {
-        return NSTimer.scheduledTimerWithTimeInterval(60, target: self, selector: "updateProgress", userInfo: nil, repeats: true)
-        }()
-
-    lazy var formatter : NSDateFormatter = {
-        let f = NSDateFormatter()
-        f.dateFormat = "yyyy-mm-dd"
-        return f
-        }()
-
-    lazy var life : Life = {
-        return Life(birthDate: NSDate())
-        }()
-
+    lazy var statusItem = NSStatusBar.systemStatusBar().statusItemWithLength(-1)
+    lazy var life = Life(birthDate: NSDate())
 
     override func awakeFromNib() {
         statusItem.highlightMode = true
         statusItem.menu = menu
-
         preferencesController.delegate = self
 
         loadPreferences()
@@ -52,24 +35,29 @@ class StatusMenuController: NSObject, PreferencesDelegate {
         }
     }
 
+
+    // Timer to update progress
+    static let UPDATE_INTERVAL: NSTimeInterval = 60 * 60
+
+    lazy var timer: NSTimer = NSTimer.scheduledTimerWithTimeInterval(StatusMenuController.UPDATE_INTERVAL, target: self, selector: "updateProgress", userInfo: nil, repeats: true)
+
     func currentProgress() -> String {
         return String(format: "%.4f%%, %d days left", life.percentageLived(), life.lifeLeftInDays())
     }
 
     func updateProgress() {
         let font = NSFont(name: "Lucida Grande", size: 13)
-        let dict = [NSFontAttributeName:font!] as [NSObject:AnyObject]
-        let title = NSMutableAttributedString(string: currentProgress(), attributes: dict)
+        let attrsDict = [NSFontAttributeName:font!]
+        let title = NSMutableAttributedString(string: currentProgress(), attributes: attrsDict)
         statusItem.attributedTitle = title
     }
 
+
     // Preferences
-    lazy var preferencesController: PreferencesController = {
-        return PreferencesController()
-        }()
+    lazy var preferencesController = PreferencesController()
 
     func loadPreferences() {
-        let date = NSUserDefaults.standardUserDefaults().valueForKey("birthday") as? NSDate ?? NSDate()
+        let date = preferencesController.loadBirthday()
         life = Life(birthDate: date)
         updateProgress()
     }
