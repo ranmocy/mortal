@@ -26,17 +26,17 @@ class PreferencesController: NSWindowController, NSWindowDelegate {
         birthdayPicker.dateValue = loadBirthday()
     }
 
-    override func showWindow(sender: AnyObject?) {
+    override func showWindow(_ sender: Any?) {
         super.showWindow(sender)
         self.window?.makeKeyAndOrderFront(sender)
-        NSApp.activateIgnoringOtherApps(true)
+        NSApp.activate(ignoringOtherApps: true)
     }
 
 
     // Delegation for saving when close
     var delegate: PreferencesDelegate?
 
-    func windowWillClose(notification: NSNotification) {
+    func windowWillClose(_ notification: Notification) {
         saveBirthday(birthdayPicker.dateValue)
         delegate?.preferencesDidUpdate()
     }
@@ -45,13 +45,13 @@ class PreferencesController: NSWindowController, NSWindowDelegate {
     // get/set birthday with UserDefaults
     static let BIRTHDAY_KEY_NAME = "birthday"
 
-    func loadBirthday() -> NSDate {
-        let defaults = NSUserDefaults.standardUserDefaults()
-        return defaults.valueForKey(PreferencesController.BIRTHDAY_KEY_NAME) as? NSDate ?? NSDate()
+    func loadBirthday() -> Date {
+        let defaults = UserDefaults.standard
+        return defaults.value(forKey: PreferencesController.BIRTHDAY_KEY_NAME) as? Date ?? Date()
     }
 
-    func saveBirthday(date: NSDate) {
-        let defaults = NSUserDefaults.standardUserDefaults()
+    func saveBirthday(_ date: Date) {
+        let defaults = UserDefaults.standard
         defaults.setValue(date, forKey: PreferencesController.BIRTHDAY_KEY_NAME)
     }
 

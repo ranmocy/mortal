@@ -16,14 +16,14 @@ class Life {
     static let HOURS_PER_YEAR = HOURS_PER_DAY * DAYS_PER_YEAR
     static let SECONDS_PER_DAY = SECONDS_PER_HOUR * HOURS_PER_DAY
 
-    let birthDate : NSDate
+    let birthDate : Date
     let lifeSpan : Int
 
-    convenience init(birthDate date: NSDate) {
+    convenience init(birthDate date: Date) {
         self.init(birthDate: date, lifeSpan: 60)
     }
 
-    init(birthDate date: NSDate, lifeSpan: Int) {
+    init(birthDate date: Date, lifeSpan: Int) {
         self.birthDate = date
         self.lifeSpan = lifeSpan
     }
@@ -47,7 +47,7 @@ class Life {
 
 
     func lifeLivedInSeconds() -> Int {
-        return Int(NSDate().timeIntervalSinceDate(self.birthDate))
+        return Int(Date().timeIntervalSince(self.birthDate))
     }
 
     func lifeLivedInHours() -> Int {

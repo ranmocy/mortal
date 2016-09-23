@@ -13,16 +13,16 @@ class StatusMenuController: NSObject, PreferencesDelegate {
 
     @IBOutlet weak var menu: NSMenu!
 
-    @IBAction func openPrefs(sender: NSMenuItem) {
+    @IBAction func openPrefs(_ sender: NSMenuItem) {
         preferencesController.showWindow(nil)
     }
 
-    @IBAction func quit(sender: NSMenuItem) {
-        NSApplication.sharedApplication().terminate(self)
+    @IBAction func quit(_ sender: NSMenuItem) {
+        NSApplication.shared().terminate(self)
     }
 
-    lazy var statusItem = NSStatusBar.systemStatusBar().statusItemWithLength(-1)
-    lazy var life = Life(birthDate: NSDate())
+    lazy var statusItem = NSStatusBar.system().statusItem(withLength: -1)
+    lazy var life = Life(birthDate: Date())
 
     override func awakeFromNib() {
         statusItem.highlightMode = true
@@ -30,16 +30,16 @@ class StatusMenuController: NSObject, PreferencesDelegate {
         preferencesController.delegate = self
 
         loadPreferences()
-        if (!timer.valid) {
+        if (!timer.isValid) {
             timer.fire()
         }
     }
 
 
     // Timer to update progress
-    static let UPDATE_INTERVAL: NSTimeInterval = 60 * 60
+    static let UPDATE_INTERVAL: TimeInterval = 60 * 60
 
-    lazy var timer: NSTimer = NSTimer.scheduledTimerWithTimeInterval(StatusMenuController.UPDATE_INTERVAL, target: self, selector: "updateProgress", userInfo: nil, repeats: true)
+    lazy var timer: Timer = Timer.scheduledTimer(timeInterval: StatusMenuController.UPDATE_INTERVAL, target: self, selector: #selector(StatusMenuController.updateProgress), userInfo: nil, repeats: true)
 
     func currentProgress() -> String {
         return String(format: "%.4f%%, %d days left", life.percentageLived(), life.lifeLeftInDays())
@@ -54,7 +54,7 @@ class StatusMenuController: NSObject, PreferencesDelegate {
 
 
     // Preferences
-    lazy var preferencesController = PreferencesController()
+    lazy var preferencesController : PreferencesController = PreferencesController()
 
     func loadPreferences() {
         let date = preferencesController.loadBirthday()
