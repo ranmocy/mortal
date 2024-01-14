@@ -18,14 +18,14 @@ class StatusMenuController: NSObject, PreferencesDelegate {
     }
 
     @IBAction func quit(_ sender: NSMenuItem) {
-        NSApplication.shared().terminate(self)
+        NSApplication.shared.terminate(self)
     }
 
-    lazy var statusItem = NSStatusBar.system().statusItem(withLength: -1)
+    lazy var statusItem = NSStatusBar.system.statusItem(withLength: -1)
     lazy var life = Life(birthDate: Date())
 
     override func awakeFromNib() {
-        statusItem.highlightMode = true
+        statusItem.button?.cell?.isHighlighted = true
         statusItem.menu = menu
         preferencesController.delegate = self
 
@@ -39,17 +39,22 @@ class StatusMenuController: NSObject, PreferencesDelegate {
     // Timer to update progress
     static let UPDATE_INTERVAL: TimeInterval = 60 * 60
 
-    lazy var timer: Timer = Timer.scheduledTimer(timeInterval: StatusMenuController.UPDATE_INTERVAL, target: self, selector: #selector(StatusMenuController.updateProgress), userInfo: nil, repeats: true)
+    lazy var timer: Timer = Timer.scheduledTimer(
+        timeInterval: StatusMenuController.UPDATE_INTERVAL,
+        target: self,
+        selector: #selector(StatusMenuController.updateProgress),
+        userInfo: nil,
+        repeats: true)
 
     func currentProgress() -> String {
         return String(format: "%.4f%%, %d days left", life.percentageLived(), life.lifeLeftInDays())
     }
 
-    func updateProgress() {
+    @objc func updateProgress() {
         let font = NSFont(name: "Lucida Grande", size: 13)
-        let attrsDict = [NSFontAttributeName:font!]
+        let attrsDict = [NSAttributedString.Key.font:font!]
         let title = NSMutableAttributedString(string: currentProgress(), attributes: attrsDict)
-        statusItem.attributedTitle = title
+        statusItem.button?.attributedTitle = title
     }
 
 
