@@ -2,8 +2,8 @@
 //  Life.swift
 //  Mortal
 //
-//  Created by Wanzhang Sheng on 4/24/15.
-//  Copyright (c) 2015 Wanzhang Sheng. All rights reserved.
+//  Created by Mocy Sheng on 4/24/15.
+//  Copyright (c) 2024 Mocy Sheng. All rights reserved.
 //
 
 import Foundation
@@ -16,8 +16,8 @@ class Life {
     static let HOURS_PER_YEAR = HOURS_PER_DAY * DAYS_PER_YEAR
     static let SECONDS_PER_DAY = SECONDS_PER_HOUR * HOURS_PER_DAY
 
-    let birthDate : Date
-    let lifeSpan : Int
+    let birthDate: Date
+    let lifeSpan: Int
 
     convenience init(birthDate date: Date) {
         self.init(birthDate: date, lifeSpan: 60)
@@ -29,9 +29,9 @@ class Life {
     }
 
     func percentageLived() -> Double {
-        return Double(self.lifeLivedInSeconds()) * 100.0 / Double(self.lifeSpanInSeconds())
+        return Double(self.lifeLivedInSeconds()) * 100.0
+            / Double(self.lifeSpanInSeconds())
     }
-
 
     func lifeSpanInDays() -> Int {
         return Life.DAYS_PER_YEAR * self.lifeSpan
@@ -45,7 +45,6 @@ class Life {
         return Life.SECONDS_PER_HOUR * self.lifeSpanInHours()
     }
 
-
     func lifeLivedInSeconds() -> Int {
         return Int(Date().timeIntervalSince(self.birthDate))
     }
@@ -57,7 +56,6 @@ class Life {
     func lifeLivedInDays() -> Int {
         return self.lifeLivedInHours() / Life.HOURS_PER_DAY
     }
-
 
     func lifeLeftInDays() -> Int {
         return self.lifeSpanInDays() - self.lifeLivedInDays()

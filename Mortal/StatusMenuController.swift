@@ -2,12 +2,12 @@
 //  StatusMenuController.swift
 //  Mortal
 //
-//  Created by Wanzhang Sheng on 4/26/15.
-//  Copyright (c) 2015 Wanzhang Sheng. All rights reserved.
+//  Created by Mocy Sheng on 4/26/15.
+//  Copyright (c) 2024 Mocy Sheng. All rights reserved.
 //
 
-import Foundation
 import Cocoa
+import Foundation
 
 class StatusMenuController: NSObject, PreferencesDelegate {
 
@@ -30,11 +30,10 @@ class StatusMenuController: NSObject, PreferencesDelegate {
         preferencesController.delegate = self
 
         loadPreferences()
-        if (!timer.isValid) {
+        if !timer.isValid {
             timer.fire()
         }
     }
-
 
     // Timer to update progress
     static let UPDATE_INTERVAL: TimeInterval = 60 * 60
@@ -47,19 +46,22 @@ class StatusMenuController: NSObject, PreferencesDelegate {
         repeats: true)
 
     func currentProgress() -> String {
-        return String(format: "%.4f%%, %d days left", life.percentageLived(), life.lifeLeftInDays())
+        return String(
+            format: "%.2f%%, %dd left", life.percentageLived(),
+            life.lifeLeftInDays())
     }
 
     @objc func updateProgress() {
-        let font = NSFont(name: "Lucida Grande", size: 13)
-        let attrsDict = [NSAttributedString.Key.font:font!]
-        let title = NSMutableAttributedString(string: currentProgress(), attributes: attrsDict)
+        let font = NSFont(name: "Lucida Grande", size: 12)
+        let attrsDict = [NSAttributedString.Key.font: font!]
+        let title = NSMutableAttributedString(
+            string: currentProgress(), attributes: attrsDict)
         statusItem.button?.attributedTitle = title
     }
 
-
     // Preferences
-    lazy var preferencesController : PreferencesController = PreferencesController()
+    lazy var preferencesController: PreferencesController =
+        PreferencesController()
 
     func loadPreferences() {
         let date = preferencesController.loadBirthday()

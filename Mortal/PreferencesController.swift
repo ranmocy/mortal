@@ -2,8 +2,8 @@
 //  PreferencesController.swift
 //  Mortal
 //
-//  Created by Wanzhang Sheng on 4/26/15.
-//  Copyright (c) 2015 Wanzhang Sheng. All rights reserved.
+//  Created by Mocy Sheng on 4/26/15.
+//  Copyright (c) 2024 Mocy Sheng. All rights reserved.
 //
 
 import Cocoa
@@ -16,7 +16,7 @@ class PreferencesController: NSWindowController, NSWindowDelegate {
 
     @IBOutlet weak var birthdayPicker: NSDatePicker!
 
-    override var windowNibName : String! {
+    override var windowNibName: String! {
         return "PreferencesController"
     }
 
@@ -32,7 +32,6 @@ class PreferencesController: NSWindowController, NSWindowDelegate {
         NSApp.activate(ignoringOtherApps: true)
     }
 
-
     // Delegation for saving when close
     var delegate: PreferencesDelegate?
 
@@ -41,13 +40,13 @@ class PreferencesController: NSWindowController, NSWindowDelegate {
         delegate?.preferencesDidUpdate()
     }
 
-
     // get/set birthday with UserDefaults
     static let BIRTHDAY_KEY_NAME = "birthday"
 
     func loadBirthday() -> Date {
         let defaults = UserDefaults.standard
-        return defaults.value(forKey: PreferencesController.BIRTHDAY_KEY_NAME) as? Date ?? Date()
+        return defaults.value(forKey: PreferencesController.BIRTHDAY_KEY_NAME)
+            as? Date ?? Date()
     }
 
     func saveBirthday(_ date: Date) {
