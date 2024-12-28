@@ -8,7 +8,8 @@
 
 import SwiftUI
 
-private let UPDATE_INTERVAL: TimeInterval = 60 * 60 // 1h
+private let DEFAULT_LIFESPAN: Int = 60
+private let UPDATE_INTERVAL: TimeInterval = 60 * 60  // 1h
 
 @main
 struct MortalApp: App {
@@ -17,7 +18,9 @@ struct MortalApp: App {
 
     @AppStorage("birthday") private var birthday = Date.now
 
-    @State private var life = Life(birthDate: Date.now)
+    @AppStorage("lifespan") private var lifespan: Int = DEFAULT_LIFESPAN
+
+    @State private var life = Life(birthdate: Date.now, lifespan: DEFAULT_LIFESPAN)
 
     @State private var progress: String = "Loading..."
 
@@ -26,7 +29,7 @@ struct MortalApp: App {
     init() {
         // Intialize the @State variables directly,
         // otherwise they are initialized independently with their own initial value
-        _life = State(initialValue: Life(birthDate: birthday))
+        _life = State(initialValue: Life(birthdate: birthday, lifespan: lifespan))
         _progress = State(initialValue: life.toString())
 
         timer = Timer.scheduledTimer(withTimeInterval: UPDATE_INTERVAL, repeats: true) { [self] _ in
@@ -57,7 +60,10 @@ struct MortalApp: App {
             }
         }
         .onChange(of: birthday) { newBirthday in
-            life = Life(birthDate: newBirthday)
+            life = Life(birthdate: newBirthday, lifespan: lifespan)
+        }
+        .onChange(of: lifespan) { newLifespan in
+            life = Life(birthdate: birthday, lifespan: newLifespan)
         }
         .onChange(of: life) { newLife in
             progress = newLife.toString()
@@ -66,12 +72,25 @@ struct MortalApp: App {
         // MARK: Preferences window
 
         let window = Window("Preferences", id: "preferences") {
-            DatePicker(
-                "Birthday",
-                selection: $birthday,
-                displayedComponents: .date
-            )
-            .frame(width: 200, height: 100, alignment: .center)
+            VStack(spacing: 20) {
+                DatePicker(
+                    "Birthday",
+                    selection: $birthday,
+                    displayedComponents: .date
+                )
+
+                HStack {
+                    Text("Lifespan")
+                    Stepper(
+                        value: $lifespan,
+                        in: 1...150,
+                        step: 1
+                    ) {
+                        Text("\(lifespan) years")
+                    }
+                }
+            }
+            .frame(width: 300, height: 150, alignment: .center)
             .padding()
         }
         .windowResizability(.contentSize)

@@ -16,10 +16,8 @@ struct Life: Equatable {
     static let HOURS_PER_YEAR = HOURS_PER_DAY * DAYS_PER_YEAR
     static let SECONDS_PER_DAY = SECONDS_PER_HOUR * HOURS_PER_DAY
 
-    static let DEFAULT_LIFE_SPAN_IN_YEARS = 60
-
-    let birthDate: Date
-    let lifeSpan: Int = DEFAULT_LIFE_SPAN_IN_YEARS
+    let birthdate: Date
+    let lifespan: Int
 
     func percentageLived() -> Double {
         return Double(self.lifeLivedInSeconds()) * 100.0
@@ -27,7 +25,7 @@ struct Life: Equatable {
     }
 
     func lifeSpanInDays() -> Int {
-        return Life.DAYS_PER_YEAR * self.lifeSpan
+        return Life.DAYS_PER_YEAR * self.lifespan
     }
 
     func lifeSpanInHours() -> Int {
@@ -39,7 +37,7 @@ struct Life: Equatable {
     }
 
     func lifeLivedInSeconds() -> Int {
-        return Int(Date().timeIntervalSince(self.birthDate))
+        return Int(Date().timeIntervalSince(self.birthdate))
     }
 
     func lifeLivedInHours() -> Int {
