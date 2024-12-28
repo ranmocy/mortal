@@ -32,6 +32,7 @@
 		C147CE5A1AEACC4F00B5F8AE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C147CE5B1AEACC4F00B5F8AE /* MortalTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MortalTests.swift; sourceTree = "<group>"; };
 		C147CE651AEB5B4200B5F8AE /* Life.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Life.swift; sourceTree = "<group>"; };
+		C9F460482D1FBD30003509D3 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +59,7 @@
 				C147CE471AEACC4F00B5F8AE /* Mortal */,
 				C147CE581AEACC4F00B5F8AE /* MortalTests */,
 				C147CE461AEACC4F00B5F8AE /* Products */,
+				C9F460482D1FBD30003509D3 /* README.md */,
 			);
 			sourceTree = "<group>";
 		};

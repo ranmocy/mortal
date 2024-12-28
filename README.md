@@ -4,7 +4,6 @@
 
 Display your mortal status in your OSX status bar.
 
-Prototyped from [forresty/mortal](https://github.com/forresty/mortal).
-Rewrote in Swift with OSX 10.10.
+You can set up your birthday and expected lifespan in the preferences panel.
 
-You can setup your birthday in the preferences panel.
+Inspired by [forresty/mortal](https://github.com/forresty/mortal). Rewrote in SwiftUI with macOS 13.
