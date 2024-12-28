@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Life {
+struct Life: Equatable {
     static let DAYS_PER_YEAR = 365
     static let HOURS_PER_DAY = 24
     static let SECONDS_PER_HOUR = 60 * 60
@@ -16,17 +16,10 @@ class Life {
     static let HOURS_PER_YEAR = HOURS_PER_DAY * DAYS_PER_YEAR
     static let SECONDS_PER_DAY = SECONDS_PER_HOUR * HOURS_PER_DAY
 
+    static let DEFAULT_LIFE_SPAN_IN_YEARS = 60
+
     let birthDate: Date
-    let lifeSpan: Int
-
-    convenience init(birthDate date: Date) {
-        self.init(birthDate: date, lifeSpan: 60)
-    }
-
-    init(birthDate date: Date, lifeSpan: Int) {
-        self.birthDate = date
-        self.lifeSpan = lifeSpan
-    }
+    let lifeSpan: Int = DEFAULT_LIFE_SPAN_IN_YEARS
 
     func percentageLived() -> Double {
         return Double(self.lifeLivedInSeconds()) * 100.0
@@ -68,5 +61,4 @@ class Life {
     func lifeLeftInSeconds() -> Int {
         return self.lifeSpanInSeconds() - self.lifeLivedInSeconds()
     }
-
 }
